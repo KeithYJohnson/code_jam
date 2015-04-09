@@ -18,8 +18,8 @@ file_path = "/Users/keithjohnson/Downloads/A-small-practice.in"
     item_cost_array.drop(items_index+1).each_with_index do |next_item, next_items_index|
       if item + next_item == credit
         @output << "Case ##{@count}: #{items_index}, #{next_items_index+items_index+1}"
-        @file_output << File.append
         break
+      end
     end
   end
 end
