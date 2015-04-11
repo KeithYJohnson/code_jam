@@ -1,20 +1,22 @@
 require 'pry'
 require 'pry-byebug'
 # path = "/Users/keithjohnson/play/code_jam/standing_o.txt"
-path = "/Users/keithjohnson/Downloads/A-small-attempt0.in"
+path = "/Users/keithjohnson/Downloads/A-large-attempt.in"
 #case 1: 0
 #case 2: 1
-#case 3: 3
+#case 3: 2
 #case 4: 0
 class StandingO
   attr_accessor :file, :array, :max_shyness, :audience, :case_number, :solution,
-                :invitee_count, :people_standing, :output
+                :invitee_count, :people_standing, :output, :total_cases, :read_file
   def initialize(filepath)
     self.file = File.open(filepath)
-    self.array = file.readlines[1..-1]
+    self.read_file = file.readlines
+    self.total_cases = read_file.first
+    self.array = read_file[1..-1]
     self.invitee_count = 0
     self.people_standing = 0
-    self.output = File.open('standing_o_solution.txt', 'w')
+    self.output = []
   end
 
   def perform
@@ -33,11 +35,15 @@ class StandingO
           @people_standing += number
         else
           @invitee_count   += (shy_level - people_standing)
-          @people_standing += (shy_level - people_standing)
+          @people_standing += ((shy_level - people_standing) + number)
         end
       end
-      File.open('standing_o_solution.txt', 'a') { |file| file.puts("Case ##{case_number}: #{@invitee_count || 0}") }
+      @output << "Case ##{case_number}: #{@invitee_count || 0}\n"
     end
+    last = @output.pop.tr("\n","")
+    @output << last
+    file_body = @output.join
+    IO.write('standing_o_solution.out', file_body)
   end
 end
 StandingO.new(path).perform
