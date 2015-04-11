@@ -1,7 +1,7 @@
 require 'pry'
 require 'pry-byebug'
 # path = "/Users/keithjohnson/play/code_jam/standing_o.txt"
-path = "/Users/keithjohnson/Downloads/A-large-attempt.in"
+path = "/Users/keithjohnson/Downloads/A-large.in"
 #case 1: 0
 #case 2: 1
 #case 3: 2
